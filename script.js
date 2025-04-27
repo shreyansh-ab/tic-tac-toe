@@ -46,7 +46,7 @@ const checkwinner = () =>{
     let pos3 = boxes[pattern[2]].innerHTML;
 
     if(pos1 != "" && pos2 != "" && pos3 != ""){
-        if (pos1 === pos2 && pos2 === pos1){
+        if (pos1 === pos2 && pos2 === pos3){
             msg.innerHTML = `Winner is Player ${pos1}`;
             winnercont.classList.remove("hide");
 
