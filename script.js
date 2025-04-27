@@ -33,32 +33,14 @@ boxes.forEach((box)=>{
             turnO = "player0"
         }
         box.disabled = true;
-
+        
         checkwinner();
+
     }
     )
 })
 
-const checkwinner = () =>{
-   for (const pattern of winpattern) {
-    let pos1 = boxes[pattern[0]].innerHTML;
-    let pos2 = boxes[pattern[1]].innerHTML;
-    let pos3 = boxes[pattern[2]].innerHTML;
 
-    if(pos1 != "" && pos2 != "" && pos3 != ""){
-        if (pos1 === pos2 && pos2 === pos3){
-            msg.innerHTML = `Winner is Player ${pos1}`;
-            winnercont.classList.remove("hide");
-
-            boxes.forEach((box)=>{
-                box.disabled = true;
-            })
-        }
-       
-    }
-    
-   }
-}
 
 // New game 
 newgame.addEventListener("click",() =>{
@@ -71,7 +53,39 @@ newgame.addEventListener("click",() =>{
     })
 })
 
+const checkwinner = () =>{
+    let isDraw = true;
 
+    for (const pattern of winpattern) {
+        let pos1 = boxes[pattern[0]].innerHTML;
+        let pos2 = boxes[pattern[1]].innerHTML;
+        let pos3 = boxes[pattern[2]].innerHTML;
+
+        if(pos1 != "" && pos2 != "" && pos3 != ""){
+            if (pos1 === pos2 && pos2 === pos3){
+                msg.innerHTML = `Winner is Player ${pos1}`;
+                winnercont.classList.remove("hide");
+
+                boxes.forEach((box)=>{
+                    box.disabled = true;
+                })
+                return;
+            }
+        }
+    }
+
+    // Check if all boxes are filled
+    boxes.forEach((box)=>{
+        if (box.innerHTML === "") {
+            isDraw = false;
+        }
+    });
+
+    if (isDraw) {
+        msg.innerHTML = "Game is a Draw!";
+        winnercont.classList.remove("hide");
+    }
+}
 
 
 
